@@ -2,15 +2,18 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 const products = require("./data/product");
+const mongoose = require("mongoose");
 dotenv.config();
 
 
-const mongoose = require("mongoose")
 
-//connect db
-mongoose.connect().then(() => console.log("db connected")).then((err)=>{
-    err;
+
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI, {
+  // useNewUrlParser and useUnifiedTopology are no longer needed
 })
+.then(() => console.log("MongoDB connected successfully"))
+.catch((err) => console.error("MongoDB connection error: ", err));
 
 
 const PORT = process.env.PORT;
